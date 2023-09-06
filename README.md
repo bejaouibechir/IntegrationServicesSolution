@@ -80,6 +80,7 @@ Cliquer ensuite droit souris sur la base de données Business DB et lancer une n
  
 Lancer le script suivant pour permettre de créer les schémas 
 exec sp_changedbowner @loginame='sa'
+
 **Note :** il faut changer le compte **'sa'** par le nom de l’utilisateur actuel qui ouvre la session SQL Sevrer au cas du besoin. Il faut rappeler que  **'sa'** est le nom du compte utilisateur crée en cours de l’installation de SQL Server en mode de sécurité mixte
 Cliquer en suite droit souris le dossier Database Diagrams pour créer un nouveau Diagrame
  
