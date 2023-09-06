@@ -1,0 +1,937 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/4/2023 1:43:30 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2023"
+  DTS:CreatorName="PC2023\DELL"
+  DTS:DTSID="{FAF7E68D-0B82-4323-963D-858D35EFF7CD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5035.3"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Step2-LoadDimDate"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{AB3A521C-D2CB-45BC-8B57-866CA65BD328}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{86492FEE-BCB8-4D62-A3A0-5ACEAEBEC17B}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[$Package::DimDate_ExcelFilePath_Param]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\SSIS\Exercices\MSBIProject\Data\DimDate.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[pc2023\pc2023.BusinessDB2]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2F2D5B3E-2B52-4BE0-95C3-9626CC9C0304}"
+      DTS:ObjectName="pc2023\pc2023.BusinessDB2">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Package::ConnectionString_Param]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Package::InitialCatalog_Param]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=pc2023\pc2023;Initial Catalog=BusinessDB2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Step5-LoadDimDate-{2F2D5B3E-2B52-4BE0-95C3-9626CC9C0304}pc2023\pc2023.BusinessDB2;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{8C6317EF-B58D-41A2-AC58-FB56FEF3E9B6}"
+      DTS:ObjectName="ConnectionString_Param">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Data Source=pc2023\pc2023;Initial Catalog=BusinessDB2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Step5-LoadDimDate-{2F2D5B3E-2B52-4BE0-95C3-9626CC9C0304}pc2023\pc2023.BusinessDB2;Auto Translate=False;</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{79992F74-6C61-4E63-9D62-CF090EC291F5}"
+      DTS:ObjectName="DimDate_ExcelFilePath_Param">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\SSIS\Exercices\MSBIProject\Data\DimDate.xlsx</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{9579352C-569E-4F3B-A0D4-9EB0ED05259C}"
+      DTS:ObjectName="InitialCatalog_Param">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">BusinessDB2</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow  Remplir la table DimDate"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{46197D67-502F-4605-9F55-01CAF1C3364A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow  Remplir la table DimDate"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow  Remplir la table DimDate\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">DimDate</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DateKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DateKey]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FullDateAlternateKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FullDateAlternateKey]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FullDateAlternateKey]"
+                      name="FullDateAlternateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfWeek]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNumberOfWeek]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfWeek]"
+                      name="DayNumberOfWeek"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FrenchDayNameOfWeek]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FrenchDayNameOfWeek]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FrenchDayNameOfWeek]"
+                      name="FrenchDayNameOfWeek"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfMonth]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNumberOfMonth]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfMonth]"
+                      name="DayNumberOfMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfYear]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNumberOfYear]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfYear]"
+                      name="DayNumberOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[WeekNumberOfYear]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[WeekNumberOfYear]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[WeekNumberOfYear]"
+                      name="WeekNumberOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FrenchMonthName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FrenchMonthName]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FrenchMonthName]"
+                      name="FrenchMonthName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[MonthNumberOfYear]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[MonthNumberOfYear]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[MonthNumberOfYear]"
+                      name="MonthNumberOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarQuarter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarQuarter]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarQuarter]"
+                      name="CalendarQuarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarYear]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarYear]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarYear]"
+                      name="CalendarYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarSemester]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarSemester]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarSemester]"
+                      name="CalendarSemester"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalQuarter]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FiscalQuarter]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalQuarter]"
+                      name="FiscalQuarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalYear]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FiscalYear]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalYear]"
+                      name="FiscalYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalSemester]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FiscalSemester]"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalSemester]"
+                      name="FiscalSemester"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DateKey]"
+                      dataType="wstr"
+                      length="255"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FullDateAlternateKey]"
+                      dataType="wstr"
+                      length="255"
+                      name="FullDateAlternateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNumberOfWeek]"
+                      dataType="wstr"
+                      length="255"
+                      name="DayNumberOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FrenchDayNameOfWeek]"
+                      dataType="wstr"
+                      length="255"
+                      name="FrenchDayNameOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNumberOfMonth]"
+                      dataType="wstr"
+                      length="255"
+                      name="DayNumberOfMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[DayNumberOfYear]"
+                      dataType="wstr"
+                      length="255"
+                      name="DayNumberOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[WeekNumberOfYear]"
+                      dataType="wstr"
+                      length="255"
+                      name="WeekNumberOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FrenchMonthName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FrenchMonthName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[MonthNumberOfYear]"
+                      dataType="wstr"
+                      length="255"
+                      name="MonthNumberOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarQuarter]"
+                      dataType="wstr"
+                      length="255"
+                      name="CalendarQuarter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarYear]"
+                      dataType="wstr"
+                      length="255"
+                      name="CalendarYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[CalendarSemester]"
+                      dataType="wstr"
+                      length="255"
+                      name="CalendarSemester" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FiscalQuarter]"
+                      dataType="wstr"
+                      length="255"
+                      name="FiscalQuarter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FiscalYear]"
+                      dataType="wstr"
+                      length="255"
+                      name="FiscalYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].ExternalColumns[FiscalSemester]"
+                      dataType="wstr"
+                      length="255"
+                      name="FiscalSemester" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DateKey]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FullDateAlternateKey]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FullDateAlternateKey]"
+                      name="FullDateAlternateKey" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DayNumberOfWeek]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DayNumberOfWeek]"
+                      name="DayNumberOfWeek" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FrenchDayNameOfWeek]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FrenchDayNameOfWeek]"
+                      name="FrenchDayNameOfWeek" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DayNumberOfMonth]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DayNumberOfMonth]"
+                      name="DayNumberOfMonth" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DayNumberOfYear]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[DayNumberOfYear]"
+                      name="DayNumberOfYear" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[WeekNumberOfYear]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[WeekNumberOfYear]"
+                      name="WeekNumberOfYear" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FrenchMonthName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FrenchMonthName]"
+                      name="FrenchMonthName" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[MonthNumberOfYear]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[MonthNumberOfYear]"
+                      name="MonthNumberOfYear" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarQuarter]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarQuarter]"
+                      name="CalendarQuarter" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarYear]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarYear]"
+                      name="CalendarYear" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarSemester]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[CalendarSemester]"
+                      name="CalendarSemester" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FiscalQuarter]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FiscalQuarter]"
+                      name="FiscalQuarter" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FiscalYear]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FiscalYear]"
+                      name="FiscalYear" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FiscalSemester]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[FiscalSemester]"
+                      name="FiscalSemester" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[pc2023\pc2023.BusinessDB2]"
+                  connectionManagerRefId="Package.ConnectionManagers[pc2023\pc2023.BusinessDB2]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FullDateAlternateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FullDateAlternateKey"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullDateAlternateKey]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FullDateAlternateKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayNumberOfWeek]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DayNumberOfWeek"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNumberOfWeek]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfWeek]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FrenchDayNameOfWeek]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FrenchDayNameOfWeek"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FrenchDayNameOfWeek]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FrenchDayNameOfWeek]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayNumberOfMonth]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DayNumberOfMonth"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNumberOfMonth]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfMonth]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayNumberOfYear]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DayNumberOfYear"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNumberOfYear]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[DayNumberOfYear]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WeekNumberOfYear]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="WeekNumberOfYear"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WeekNumberOfYear]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[WeekNumberOfYear]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FrenchMonthName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FrenchMonthName"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FrenchMonthName]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FrenchMonthName]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MonthNumberOfYear]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MonthNumberOfYear"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MonthNumberOfYear]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[MonthNumberOfYear]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CalendarQuarter]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CalendarQuarter"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarQuarter]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarQuarter]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CalendarYear]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CalendarYear"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarYear]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CalendarSemester]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CalendarSemester"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarSemester]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[CalendarSemester]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FiscalQuarter]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FiscalQuarter"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FiscalQuarter]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalQuarter]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FiscalYear]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FiscalYear"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FiscalYear]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalYear]" />
+                    <inputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FiscalSemester]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FiscalSemester"
+                      externalMetadataColumnId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FiscalSemester]"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output].Columns[FiscalSemester]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullDateAlternateKey]"
+                      dataType="dbDate"
+                      name="FullDateAlternateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNumberOfWeek]"
+                      dataType="ui1"
+                      name="DayNumberOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FrenchDayNameOfWeek]"
+                      dataType="wstr"
+                      length="10"
+                      name="FrenchDayNameOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNumberOfMonth]"
+                      dataType="ui1"
+                      name="DayNumberOfMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNumberOfYear]"
+                      dataType="i2"
+                      name="DayNumberOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WeekNumberOfYear]"
+                      dataType="ui1"
+                      name="WeekNumberOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FrenchMonthName]"
+                      dataType="wstr"
+                      length="10"
+                      name="FrenchMonthName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MonthNumberOfYear]"
+                      dataType="ui1"
+                      name="MonthNumberOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarQuarter]"
+                      dataType="ui1"
+                      name="CalendarQuarter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
+                      dataType="i2"
+                      name="CalendarYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarSemester]"
+                      dataType="ui1"
+                      name="CalendarSemester" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FiscalQuarter]"
+                      dataType="ui1"
+                      name="FiscalQuarter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FiscalYear]"
+                      dataType="i2"
+                      name="FiscalYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FiscalSemester]"
+                      dataType="ui1"
+                      name="FiscalSemester" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow  Remplir la table DimDate.Paths[Excel Source Output]"
+              endId="Package\Data Flow  Remplir la table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow  Remplir la table DimDate\Excel Source.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Purger la  table DimDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B23140B5-2AF1-4FBD-99B1-18FCCC4588CA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Purger la  table DimDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2F2D5B3E-2B52-4BE0-95C3-9626CC9C0304}"
+          SQLTask:SqlStatementSource="delete dimdate" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C721D7DC-E35D-4C42-8F91-1400C6DD2349}"
+      DTS:From="Package\Execute SQL Purger la  table DimDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow  Remplir la table DimDate" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="252,42.6666666666667"
+          Id="Package\Data Flow  Remplir la table DimDate"
+          TopLeft="539.999975860119,267.526312852088" />
+        <NodeLayout
+          Size="261.333333333334,42.6666666666667"
+          Id="Package\Execute SQL Purger la  table DimDate"
+          TopLeft="532.499976195396,153.947366730741" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="664.583309361091,196.614033397407">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70.9122794546803"
+              Start="0,0"
+              End="0,63.4122794546803">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.4122794546803" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Purger la table DimDate si elle est remplise"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="256,40"
+          Id="3ddd7a17-2204-4a51-8984-512ade6137ba"
+          TopLeft="816.249963510782,154.631577249544" />
+        <AnnotationLayout
+          Text="Remplir la table DimDate"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="161.333333333334,40"
+          Id="d36f3a68-801c-4abd-8878-5435e4b23f12"
+          TopLeft="811.2499637343,269.578944408497" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow  Remplir la table DimDate">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Data Flow  Remplir la table DimDate\OLE DB Destination"
+          TopLeft="301.249986533076,192.263155783725" />
+        <NodeLayout
+          Size="142.666666666667,42.6666666666667"
+          Id="Package\Data Flow  Remplir la table DimDate\Excel Source"
+          TopLeft="321.874985611067,54.0526309854602" />
+        <EdgeLayout
+          Id="Package\Data Flow  Remplir la table DimDate.Paths[Excel Source Output]"
+          TopLeft="390.895819405405,96.7192976521264">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,95.5438581315986"
+              Start="0,0"
+              End="0,88.0438581315986">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,88.0438581315986" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Extraire les données à partir du fichier excel &#xA;DimDate.xlsx"
+          ParentId="Package\Data Flow  Remplir la table DimDate"
+          FontInfo="{assembly:Null}"
+          Size="261.333333333334,56"
+          Id="01a0d267-2726-4b1c-a303-69bfd6e4088d"
+          TopLeft="514.999976977707,55.4210520230667" />
+        <AnnotationLayout
+          Text="Charger les données vers la table&#xA;DimDate"
+          ParentId="Package\Data Flow  Remplir la table DimDate"
+          FontInfo="{assembly:Null}"
+          Size="204,56"
+          Id="8026e410-e168-4469-936a-c72568e712d0"
+          TopLeft="554.374975217507,191.578945264922" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow  Remplir la table DimDate\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow  Remplir la table DimDate\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
